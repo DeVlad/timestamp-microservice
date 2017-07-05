@@ -1,6 +1,6 @@
-var express = require('express');
-var app = express();
-var port = process.env.PORT || 8000;
+var express = require('express'),
+    app = express(),
+    port = process.env.PORT || 8000;
 var moment = require('moment');
 
 app.use(express.static('public'));
@@ -10,7 +10,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/api', function (req, res) {
-    res.send('usage: Please provide Unix timestamp or human readable date after in the url');
+    res.send('Usage: Please provide Unix timestamp or human readable date after in the url');
 });
 
 app.get('/api/:data', function (req, res) {
@@ -18,12 +18,19 @@ app.get('/api/:data', function (req, res) {
     var epoch = null;
     var date = null;
     if (/^[0-9]{10}$/.test(input)) {
-        date = moment.unix(input).format("LL");
+        date = moment.unix(input).format('LL');
         epoch = input;
         if (date == 'Invalid date') {
-            date = 'null date change it';
+            date = null;
         }
 
+    } else {
+        epoch = moment.utc(input).unix();
+        date = moment.utc(input).format('LL');
+        if (date == 'Invalid date') {
+            date = null;
+            epoch = null;
+        }
     }
 
     res.send(`{ "unix": "${epoch}", "natural": "${date}" }`);
@@ -39,7 +46,7 @@ app.use(function (err, req, res, next) {
     } else {
         // TODO: More errors...
     }
-
+    next();
 });
 
-app.listen(port, console.log('Listening on port:', port));
+app.listen(port);
