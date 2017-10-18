@@ -9,8 +9,8 @@ app.get('/', function (req, res) {
     res.sendFile('index.html');
 });
 
-app.get('/api', function (req, res) {
-    res.send('Usage: Please provide Unix timestamp or human readable date after in the url');
+app.get('/api', function (req, res) {    
+    res.sendFile('public/api.html' , { root : __dirname});
 });
 
 app.get('/api/:data', function (req, res) {
