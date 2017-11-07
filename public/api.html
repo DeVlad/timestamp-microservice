@@ -9,11 +9,15 @@
 </head>
 
 <body>
-
     <h2>Please provide Unix timestamp or human readable date in the url</h2>
-    <p>Example request url: /api/02-07-2017</p>
+    <p>Example request url: <a id="url" href="">Link</a><span id="link"></span></p>
     <p>Example response: { "unix": "1486425600", "natural": "February 7, 2017" }</p>
-
+    <script>
+        var url = window.location.origin + '/api/02-07-2017';
+        console.log(url)
+        document.getElementById("url").href.innerHTML = url;
+        document.getElementById("url").innerHTML = url;        
+    </script>
 </body>
 
 </html>
