@@ -3,7 +3,7 @@ var express = require('express'),
     port = process.env.PORT || 8000;
 var moment = require('moment');
 
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
     res.sendFile('index.html');
